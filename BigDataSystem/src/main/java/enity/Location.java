@@ -1,4 +1,4 @@
-package site.selection;
+package enity;
 
 public class Location {
 	private int x;

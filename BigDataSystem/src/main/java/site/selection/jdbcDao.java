@@ -11,14 +11,11 @@ import java.util.HashMap;
 
 import database.SqlConnection;
 import enity.Business;
-import enity.Industry;;
 
 public class jdbcDao {
 	private static Connection connection;
 	
-	private static final double LatShift = 0.0;
-	private static final double LngShift = 0.0;
-	
+	//查询某商圈某行业的商户
 	public List<Business> readData(int cluster, String b_type)
 	{	
 		List<Business> data = new ArrayList<Business>();
@@ -37,8 +34,8 @@ public class jdbcDao {
 				String business_type = rs.getString("business_type");
 				int frequency = rs.getInt("frequency");
 				float total_amount = rs.getFloat("total_amount");
-				double lat = rs.getDouble("lat") - LatShift;
-				double lng = rs.getDouble("lng") - LngShift;
+				double lat = rs.getDouble("lat");
+				double lng = rs.getDouble("lng");
 				String district = rs.getString("district");
 				
 				data.add(new Business(business_id, original_business_id, business_name, business_type, 
@@ -62,9 +59,10 @@ public class jdbcDao {
 		return data;
 	}
 	
-	public List<Industry> readIndustry_Growth(int cluster, String Industry)
+	//查询某商圈中某行业的
+	public List<Business> readIndustry_Growth(int cluster, String Industry)
 	{	
-		List<Industry> data = new ArrayList<Industry>();
+		List<Business> data = new ArrayList<Business>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -77,7 +75,7 @@ public class jdbcDao {
 				float total_amount = rs.getFloat("total_amount");
 				String growth = rs.getString("incre14");
 				
-				data.add(new Industry(total_amount, growth));
+				data.add(new Business(total_amount, growth));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -97,9 +95,9 @@ public class jdbcDao {
 		return data;
 	}
 	
-	public List<Industry> add_year(int cluster,int year, String Industry)
+	public List<Business> add_year(int cluster,int year, String Industry)
 	{	
-		List<Industry> data = new ArrayList<Industry>();
+		List<Business> data = new ArrayList<Business>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -113,7 +111,7 @@ public class jdbcDao {
 				float limit = rs.getFloat("limit");
 				float daily_free = rs.getFloat("daily_fre");
 				float total_amount=limit*daily_free;
-				data.add(new Industry(total_amount));
+				data.add(new Business(total_amount));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -178,8 +176,8 @@ public class jdbcDao {
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				double lat = rs.getDouble("lat")-LatShift;
-				double lng = rs.getDouble("lng")-LngShift;
+				double lat = rs.getDouble("lat");
+				double lng = rs.getDouble("lng");
 				double total_amount=rs.getDouble("limit")*rs.getDouble("daily_free");
 				String businees_type=rs.getString("business_type");
 				int year=rs.getInt("dis_year");
@@ -261,9 +259,9 @@ public class jdbcDao {
 		}
 	}
 	
-	public List<Industry> dis_year(int cluster,int year, String Industry)
+	public List<Business> dis_year(int cluster,int year, String Industry)
 	{	
-		List<Industry> data = new ArrayList<Industry>();
+		List<Business> data = new ArrayList<Business>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -273,8 +271,8 @@ public class jdbcDao {
 			ps = connection.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				double total_amount=rs.getDouble("total_amount");
-				data.add(new Industry(total_amount));
+				float total_amount=rs.getFloat("total_amount");
+				data.add(new Business(total_amount));
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception

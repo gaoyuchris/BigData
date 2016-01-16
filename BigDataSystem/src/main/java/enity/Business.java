@@ -26,40 +26,20 @@ public class Business {
 	private double weight;
 	private int year;
 
+	private String growth;
 	
+	public String getGrowth() {
+		return growth;
+	}
+	public void setGrowth(String growth) {
+		this.growth = growth;
+	}
 	
 	public int getYear() {
 		return year;
 	}
 	public void setYear(int year) {
 		this.year = year;
-	}
-	public Business(double lat, double lng,double weight,int year,String business_type) {
-		super();
-		this.weight=weight;
-		this.lat = lat;
-		this.lng = lng;
-		this.year=year;
-		this.business_type=business_type;
-	}
-	public Business(double lat, double lng, int cluster) {
-		super();
-		this.lat = lat;
-		this.lng = lng;
-		this.cluster = cluster;
-	}
-	public Business(int business_id, String original_business_id, String business_name, String business_type,
-			int frequency, float total_amount, double lat, double lng, String district) {
-		super();
-		this.business_id = business_id;
-		this.original_business_id = original_business_id;
-		this.business_name = business_name;
-		this.business_type = business_type;
-		this.frequency = frequency;
-		this.total_amount = total_amount;
-		this.lat = lat;
-		this.lng = lng;
-		this.district = district;
 	}
 	
 	public double getWeight() {
@@ -159,11 +139,44 @@ public class Business {
 		this.cluster = cluster;
 	}
 	
-//	public static double getDistance(Business p1, Business p2){
-//		return Math.sqrt((p1.getLat()-p2.getLat())*(p1.getLat()-p2.getLat())) 
-//				+ (p1.getLng() - p2.getLng())*(p1.getLng() - p2.getLng());
-//	}
-//	
+	public Business(float total_amount) {
+		super();
+		this.total_amount = total_amount;
+	}
+	
+	public Business(float total_amount, String growth) {
+		super();
+		this.total_amount = total_amount;
+		this.growth = growth;
+	}
+	public Business(double lat, double lng,double weight,int year,String business_type) {
+		super();
+		this.weight=weight;
+		this.lat = lat;
+		this.lng = lng;
+		this.year=year;
+		this.business_type=business_type;
+	}
+	public Business(double lat, double lng, int cluster) {
+		super();
+		this.lat = lat;
+		this.lng = lng;
+		this.cluster = cluster;
+	}
+	public Business(int business_id, String original_business_id, String business_name, String business_type,
+			int frequency, float total_amount, double lat, double lng, String district) {
+		super();
+		this.business_id = business_id;
+		this.original_business_id = original_business_id;
+		this.business_name = business_name;
+		this.business_type = business_type;
+		this.frequency = frequency;
+		this.total_amount = total_amount;
+		this.lat = lat;
+		this.lng = lng;
+		this.district = district;
+	}
+	
 	public static double getDistance(Business p1, Business p2){
 		return distanceLatLng(p1.getLng(), p1.getLat(), p2.getLng(), p2.getLat());
 	}
@@ -173,23 +186,21 @@ public class Business {
 	}
 	
 	/**
-	 * �����������������(��γ��)����
 	 * 
 	 * @param long1
-	 *            ��һ�㾭��
+	 *            第一个地点经度
 	 * @param lat1
-	 *            ��һ��γ��
+	 *            第一个地点纬度
 	 * @param long2
-	 *            �ڶ��㾭��
+	 *            第二个地点经度
 	 * @param lat2
-	 *            �ڶ���γ��
-	 * @return ���ؾ��� ��λ����
+	 *            第二个地点纬度
+	 * @return 两个地点实际距离
 	 */
 	private static double distanceLatLng(double long1, double lat1, double long2,
 			double lat2) {
 		double a, b, R;
-		R = 6378137; // ����뾶
-		lat1 = lat1 * Math.PI / 180.0;
+		R = 6378137; // 地球半径		lat1 = lat1 * Math.PI / 180.0;
 		lat2 = lat2 * Math.PI / 180.0;
 		a = lat1 - lat2;
 		b = (long1 - long2) * Math.PI / 180.0;

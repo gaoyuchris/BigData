@@ -1,7 +1,7 @@
 package site.selection;
 
 public class Cnt_All {
-	public static final String industry[]={"å®¾é¦†ç±»","é¤é¥®ç±»","è¶…å¸‚ç±»","å¤§å‹å®¶ç”µä¸“å–","æ‰¹å‘ç±»","æ—¥ç”¨ç™¾è´§ç±»","å¨±ä¹ç±»","ç å®ã€å·¥è‰ºç±»","ä¸“ä¸šæœåŠ¡ç±»"};
+	public static final String industry[]={"±ö¹İÀà","²ÍÒûÀà","³¬ÊĞÀà","´óĞÍ¼Òµç×¨Âô","Åú·¢Àà","ÈÕÓÃ°Ù»õÀà","ÓéÀÖÀà","Öé±¦¡¢¹¤ÒÕÀà","×¨Òµ·şÎñÀà"};
 	
 	public static void main(String[] args) {
 		Cnt_Growth cg=new Cnt_Growth();
