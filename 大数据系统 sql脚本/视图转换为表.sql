@@ -1,0 +1,1 @@
+select * into  business_table from business

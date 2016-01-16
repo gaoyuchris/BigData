@@ -1,0 +1,1 @@
+select * from (select  * from business_cluster  order by total_amount  desc limit 1000 ) temp where cluster != 0

@@ -1,0 +1,1 @@
+select cluster, sum(frequency)/14 as cluster_frequency_dayavg from business_cluster group by cluster having cluster != 0

@@ -1,0 +1,1 @@
+SELECT cluster, COUNT(*) as business_num  from business_cluster group by cluster having cluster != 0
